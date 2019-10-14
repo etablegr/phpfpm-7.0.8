@@ -6,7 +6,7 @@ MAINTAINER Desyllas Dimitrios <d.desyllas@e-table.gr><pcmagas@disroot.org>
 
 ENV DOCKER_UID=1000 \
     DOCKER_GID=1000 \
-    XDEBUG_CONF_FILE=${PHP_CONF_DIR}/docker-php-ext-xdebug.ini \
+    XDEBUG_CONF_FILE=/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     XDEBUG_HOST="" \
     XDEBUG_IDE_KEY="" \
     XDEBUG_PORT=9000 \
@@ -26,6 +26,7 @@ RUN buildDeps=" \
     libxml2-dev \
     libpng12-dev \
     git  \
+    net-tools \
     "; \
     set -x \
     && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
@@ -80,6 +81,6 @@ RUN echo "Fixing Permissions on Entrypoint Script \n" &&\
     chmod +x /usr/local/bin/entrypoint.sh &&\
     usermod --shell /bin/bash www-data
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 ENTRYPOINT /usr/local/bin/entrypoint.sh php-fpm
