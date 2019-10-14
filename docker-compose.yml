@@ -1,18 +1,10 @@
 version: "3.7"
 
 services:
-  base:
-    build:
-      context: .
-      dockerfile: ./dockerfiles/Dockerfile
-    image: etable/php7.0.8
-    stdin_open: true
-    tty: true
-
   php708:
     build:
       context: .
-      dockerfile: ./dockerfiles/Dockerfile_old
+      dockerfile: ./Dockerfile
     image: etable/php7.0.8-old
     volumes:
       - "./www:/var/www/html"
